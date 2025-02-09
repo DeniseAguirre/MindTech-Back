@@ -1,8 +1,10 @@
 import Product from "../../models/Product.js";
 
-export let readAll = async (req, res, next) => {
+export const readAll = async (req, res, next) => {
   try {
-    let all = await Product.find();
+    const all = await Product.find()
+      .populate("brand", "name") // Solo trae el campo "name" del brand
+      .populate("category", "name");
     res.status(200).json({
       products: all,
     });
