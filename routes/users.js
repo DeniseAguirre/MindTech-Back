@@ -1,5 +1,5 @@
 import { Router } from "express";
-let router = Router();
+const router = Router();
 
 // Controllers
 import { readAll, readOne } from "../controllers/users/read.js";

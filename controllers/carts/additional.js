@@ -5,6 +5,7 @@ import Product from "../../models/Product.js";
 export const createCartOnLogin = async (req, res, next) => {
   try {
     const userID = req.query.userID;
+    console.log("userId", req.query.userID);
 
     const existingCart = await Cart.findOne({ user: userID });
     if (existingCart) {
@@ -70,7 +71,9 @@ export const removeProduct = async (req, res, next) => {
     if (existingProductIndex !== -1) {
       cart.products.splice(existingProductIndex, 1); // Eliminar el producto del array
     } else {
-      return res.status(404).json({ error: "Producto no encontrado en el carrito" });
+      return res
+        .status(404)
+        .json({ error: "Producto no encontrado en el carrito" });
     }
 
     cart.total = cart.products.reduce((total, product) => {
@@ -85,7 +88,6 @@ export const removeProduct = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export const addProduct = async (req, res, next) => {
   try {
